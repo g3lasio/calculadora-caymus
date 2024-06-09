@@ -119,33 +119,36 @@ const tankData = {
                 "I5": { "GALS_PER_INCH": 440.64, "GALS_IN_TOP": 7551.57, "TOP_INCHES": 58.25, "TOTAL_GALS": 161555 },
                 "I6": { "GALS_PER_INCH": 440.64, "GALS_IN_TOP": 7551.57, "TOP_INCHES": 58.25, "TOTAL_GALS": 161555 },
                 "I7": { "GALS_PER_INCH": 440.64, "GALS_IN_TOP": 7551.57, "TOP_INCHES": 58.25, "TOTAL_GALS": 161555 }
-            };
+           };
 
-            function calcular() {
-                const tanque = document.getElementById("tanque").value;
-                const calculo = document.getElementById("calculo").value;
-                const input = parseFloat(document.getElementById("input").value);
-                const data = tankData[tanque];
-                let resultado = 0;
-            
-                if (!data || isNaN(input)) {
-                    resultado = "Entrada inválida o tanque no encontrado.";
-                } else if (calculo === "galones") {
-                    const espacioEnPulgadas = input;
-                    const galonesEnCuerpo = (espacioEnPulgadas - data.TOP_INCHES) * data.GALS_PER_INCH;
-                    const galonesTotales = galonesEnCuerpo + data.GALS_IN_TOP;
-                    resultado = data.TOTAL_GALS - galonesTotales;
-                } else if (calculo === "pulgadas") {
-                    const galonesDeseados = input;
-                    const galonesEspacio = data.TOTAL_GALS - galonesDeseados;
-                    if (galonesEspacio <= data.GALS_IN_TOP) {
-                        resultado = galonesEspacio / data.GALS_PER_INCH;
-                    } else {
-                        const galonesCuerpo = galonesEspacio - data.GALS_IN_TOP;
-                        const pulgadasCuerpo = galonesCuerpo / data.GALS_PER_INCH;
-                        resultado = pulgadasCuerpo + data.TOP_INCHES;
-                    }
-                }
-            
-                document.getElementById("resultadoTexto").innerText = typeof resultado === "number" ? resultado.toFixed(2) : resultado;
-            }
+function calcular() {
+    const tanque = document.getElementById("tanque").value;
+    const calculo = document.getElementById("calculo").value;
+    const input = parseFloat(document.getElementById("input").value);
+    const data = tankData[tanque];
+    let resultado = 0;
+    let unidad = "";
+
+    if (!data || isNaN(input)) {
+        resultado = "Entrada inválida o tanque no encontrado.";
+    } else if (calculo === "galones") {
+        const espacioEnPulgadas = input;
+        const galonesEnCuerpo = (espacioEnPulgadas - data.TOP_INCHES) * data.GALS_PER_INCH;
+        const galonesTotales = galonesEnCuerpo + data.GALS_IN_TOP;
+        resultado = data.TOTAL_GALS - galonesTotales;
+        unidad = " Galones";
+    } else if (calculo === "pulgadas") {
+        const galonesDeseados = input;
+        const galonesEspacio = data.TOTAL_GALS - galonesDeseados;
+        if (galonesEspacio <= data.GALS_IN_TOP) {
+            resultado = galonesEspacio / data.GALS_PER_INCH;
+        } else {
+            const galonesCuerpo = galonesEspacio - data.GALS_IN_TOP;
+            const pulgadasCuerpo = galonesCuerpo / data.GALS_PER_INCH;
+            resultado = pulgadasCuerpo + data.TOP_INCHES;
+        }
+        unidad = " Pulgadas";
+    }
+
+    document.getElementById("resultadoTexto").innerText = typeof resultado === "number" ? resultado.toFixed(2) + unidad : resultado;
+}
