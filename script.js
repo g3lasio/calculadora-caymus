@@ -166,7 +166,7 @@ function calcular() {
     }
 
     document.getElementById("resultadoTexto").innerText = typeof resultado === "number" ? resultado.toFixed(2) + unidad : resultado;
-}
+};
 function mostrarMensajeEmergente() {
     const mensajeEmergente = document.getElementById("mensajeEmergente");
     const cerrarMensaje = document.getElementById("cerrarMensaje");
