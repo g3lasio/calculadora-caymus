@@ -166,33 +166,4 @@ function calcular() {
     }
 
     document.getElementById("resultadoTexto").innerText = typeof resultado === "number" ? resultado.toFixed(2) + unidad : resultado;
-};
-function mostrarMensajeEmergente() {
-    const mensajeEmergente = document.getElementById("mensajeEmergente");
-    const cerrarMensaje = document.getElementById("cerrarMensaje");
-
-    const storageKey = "mensajeEmergenteVisto";
-    const diasDuracion = 10; // Duración en días
-
-    // Verificar si el mensaje ya ha sido visto
-    const mensajeVisto = localStorage.getItem(storageKey);
-    const fechaActual = new Date().getTime();
-
-    if (!mensajeVisto || fechaActual - mensajeVisto > diasDuracion * 24 * 60 * 60 * 1000) {
-        // Mostrar el mensaje
-        mensajeEmergente.style.display = "block";
-    }
-
-    // Cerrar el mensaje
-    cerrarMensaje.addEventListener("click", function() {
-        mensajeEmergente.style.display = "none";
-        localStorage.setItem(storageKey, fechaActual); // Guardar la fecha actual
-    });
 }
-
-document.addEventListener("DOMContentLoaded", function() {
-    // Código existente...
-    
-    // Llamar a la función del mensaje emergente
-    mostrarMensajeEmergente();
-});
