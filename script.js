@@ -1,3 +1,16 @@
+// Verificar si el usuario está logueado
+document.addEventListener("DOMContentLoaded", function() {
+    // Verifica si hay un usuario logueado en localStorage
+    const usuarioLogueado = localStorage.getItem('usuarioLogueado');
+    
+    // Si no hay usuario logueado, redirigir a login.html
+    if (!usuarioLogueado) {
+        window.location.href = 'login.html';
+        return; // Evitar que se ejecute el resto del script
+    }
+    // Aquí ya es seguro permitir acceso a la calculadora
+    document.getElementById("calcularBtn").addEventListener("click", calcular);
+});
 document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("calcularBtn").addEventListener("click", calcular);
 });
