@@ -8,6 +8,15 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Verificar si el usuario está autenticado
+        if (localStorage.getItem("isAuthenticated") !== "true") {
+            // Si no está autenticado, redirigir a la página de login
+            window.location.href = "login.html";
+        }
+    });
+</script>
     <div class="container">
         <h1>Caymus Calculator</h1>
         <div class="form-group">
