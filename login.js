@@ -1,33 +1,40 @@
-document.addEventListener("DOMContentLoaded", function() {
-    // Check if user is already logged in
-    if (localStorage.getItem("authenticated")) {
-        window.location.href = "index.html"; // Redirect to the main page if already logged in
-    }
+document.addEventListener("DOMContentLoaded", function () {
+    // Lista de usuarios autorizados
+    const users = [
+        { username: "gelasio", password: "Sanchez" },
+        { username: "jesus", password: "Lun@" },
+        { username: "marcos", password: "Rodrigu3z" },
+        { username: "paul", password: "Sim0n" },
+        { username: "sandro", password: "Lin0" },
+        { username: "bernabe", password: "Rodrigu3z" }
+    ];
 
     const loginForm = document.getElementById("loginForm");
-    loginForm.addEventListener("submit", function(e) {
-        e.preventDefault();
-        
-        const username = document.getElementById("username").value;
-        const password = document.getElementById("password").value;
+    const usernameInput = document.getElementById("username");
+    const passwordInput = document.getElementById("password");
+    const errorMessage = document.getElementById("errorMessage");
 
-        // Predefined list of authorized users
-        const authorizedUsers = [
-            { username: "gelasio", password: "Sanchez" },
-            { username: "jesus", password: "Lun@" },
-            { username: "marcos", password: "Rodrigu3z" },
-            { username: "paul", password: "Sim0n" },
-            { username: "sandro", password: "Lin0" },
-            { username: "bernabe", password: "Rodrigu3z" }
-        ];
-        const user = authorizedUsers.find(user => user.username === username && user.password === password);
+    // Verificar si ya está autenticado
+    if (localStorage.getItem("isAuthenticated") === "true") {
+        window.location.href = "index.html"; // Redirigir a la calculadora
+    }
+
+    loginForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const username = usernameInput.value;
+        const password = passwordInput.value;
+
+        const user = users.find(u => u.username === username && u.password === password);
 
         if (user) {
-            localStorage.setItem("authenticated", true);
-            window.location.href = "index.html"; // Redirect to the main page after successful login
+            // Autenticación exitosa
+            localStorage.setItem("isAuthenticated", "true");
+            window.location.href = "index.html"; // Redirigir a la calculadora
         } else {
-            const errorMessage = document.getElementById("error-message");
-            errorMessage.innerText = "Username o Password incorrectos.";
+            // Mostrar mensaje de error
+            errorMessage.textContent = "Usuario o contraseña incorrectos.";
+            errorMessage.style.display = "block";
         }
     });
 });
