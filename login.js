@@ -14,22 +14,32 @@ document.addEventListener("DOMContentLoaded", function () {
     const passwordInput = document.getElementById("password");
     const errorMessage = document.getElementById("errorMessage");
 
+    // Evento de envío del formulario
     loginForm.addEventListener("submit", function (e) {
         e.preventDefault();
 
-        const username = usernameInput.value;
-        const password = passwordInput.value;
+        const username = usernameInput.value.trim(); // Eliminamos espacios adicionales
+        const password = passwordInput.value.trim(); // Eliminamos espacios adicionales
 
+        // Buscar usuario
         const user = users.find(u => u.username === username && u.password === password);
 
         if (user) {
-            // Autenticación exitosa
-            localStorage.setItem("isAuthenticated", "true");
-            window.location.href = "index.html"; // Redirigir a la calculadora
+            // Si el usuario y contraseña son correctos
+            setAuthCookie("isAuthenticated", "true", 7); // Autenticación válida por 7 días
+            window.location.href = "index.html"; // Redirigir a la página principal
         } else {
-            // Mostrar mensaje de error
-            errorMessage.textContent = "Usuario o contraseña incorrectos.";
+            // Mostrar error si las credenciales no coinciden
+            errorMessage.textContent = "Username o contraseña incorrectos.";
             errorMessage.style.display = "block";
         }
     });
+
+    // Función para crear una cookie con duración de 7 días
+    function setAuthCookie(name, value, days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        const expires = "expires=" + date.toUTCString();
+        document.cookie = name + "=" + value + ";" + expires + ";path=/";
+    }
 });
