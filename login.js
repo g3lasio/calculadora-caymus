@@ -14,11 +14,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const passwordInput = document.getElementById("password");
     const errorMessage = document.getElementById("errorMessage");
 
-    // Verificar si ya está autenticado
-    if (localStorage.getItem("isAuthenticated") === "true") {
-        window.location.href = "index.html"; // Redirigir a la calculadora
-    }
-
     loginForm.addEventListener("submit", function (e) {
         e.preventDefault();
 
