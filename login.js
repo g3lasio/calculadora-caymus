@@ -21,15 +21,18 @@ document.addEventListener("DOMContentLoaded", function () {
         const username = usernameInput.value.trim(); // Eliminamos espacios adicionales
         const password = passwordInput.value.trim(); // Eliminamos espacios adicionales
 
+        console.log("Verificando credenciales...");
+
         // Buscar usuario
         const user = users.find(u => u.username === username && u.password === password);
 
         if (user) {
-            // Si el usuario y contraseña son correctos
+            console.log("Login correcto. Creando cookie de autenticación...");
             setAuthCookie("isAuthenticated", "true", 7); // Autenticación válida por 7 días
             window.location.href = "index.html"; // Redirigir a la página principal
         } else {
             // Mostrar error si las credenciales no coinciden
+            console.log("Username o contraseña incorrectos.");
             errorMessage.textContent = "Username o contraseña incorrectos.";
             errorMessage.style.display = "block";
         }
@@ -41,5 +44,6 @@ document.addEventListener("DOMContentLoaded", function () {
         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
         const expires = "expires=" + date.toUTCString();
         document.cookie = name + "=" + value + ";" + expires + ";path=/";
+        console.log(`Cookie creada: ${name}=${value}; Expires in: ${days} days`);
     }
 });
