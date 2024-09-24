@@ -1,19 +1,16 @@
-// Verificar si el usuario está logueado
+// Eliminar o comentar la verificación de login en localStorage
 document.addEventListener("DOMContentLoaded", function() {
-    // Verifica si hay un usuario logueado en localStorage
-    const usuarioLogueado = localStorage.getItem('usuarioLogueado');
-    
-    // Si no hay usuario logueado, redirigir a login.html
-    if (!usuarioLogueado) {
-        window.location.href = 'login.html';
-        return; // Evitar que se ejecute el resto del script
-    }
-    // Aquí ya es seguro permitir acceso a la calculadora
+    // Verificación de usuario eliminada para acceso directo a la calculadora
+
+    // Acceso directo a la calculadora sin login
     document.getElementById("calcularBtn").addEventListener("click", calcular);
 });
-document.addEventListener("DOMContentLoaded", function() {
-    document.getElementById("calcularBtn").addEventListener("click", calcular);
-});
+
+// Elimina este segundo bloque redundante si ya tienes el primer bloque activado
+// document.addEventListener("DOMContentLoaded", function() {
+//     document.getElementById("calcularBtn").addEventListener("click", calcular);
+// });
+
 const tankData = {
     "BL1": { "GALS_PER_INCH": 82.74, "GALS_IN_TOP": 373.56, "TOP_INCHES": 24.15, "TOTAL_GALS": 16239.42 },
     "BL2": { "GALS_PER_INCH": 82.74, "GALS_IN_TOP": 373.56, "TOP_INCHES": 24.15, "TOTAL_GALS": 16239.42 },

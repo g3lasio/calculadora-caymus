@@ -8,23 +8,6 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // Verificar si la cookie "isAuthenticated" está presente
-        if (!getAuthCookie("isAuthenticated")) {
-            // Si no está autenticado, redirigir a login.html
-            window.location.href = "login.html";
-        }
-    });
-
-    // Función para leer las cookies y verificar autenticación
-    function getAuthCookie(name) {
-        const value = "; " + document.cookie;
-        const parts = value.split("; " + name + "=");
-        if (parts.length === 2) return parts.pop().split(";").shift();
-        return null;
-    }
-</script>
     <div class="container">
         <h1>Caymus Calculator</h1>
         <div class="form-group">
